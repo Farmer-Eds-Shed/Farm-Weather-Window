@@ -1,3 +1,9 @@
-# Your code goes here.
-# You can delete these comments, but do not change the name of this file
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
+import requests
+import api_key
+
+lat = 53.6471
+lon = 6.6967
+api_key = api_key.api_key
+response = requests.get(f"https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={api_key}")
+print(response.json())
+print(api_key)
