@@ -13,11 +13,21 @@ def owm_api():
     print(data["daily"][1]["rain"])
 
 
+def clean():
+    """Clear the Screen"""
+    # For Windows
+    if os.name == 'nt':
+        _ = os.system('cls')
+    # For macOS and Linux
+    else:
+        _ = os.system('clear')
+
+
 def print_menu():
     """Print the main Menu"""
-    print('Welcome to Farm Weather Window')
-    print('A dedicated forecast based on farm activity')
-    print('Please select the farm Weater forecast window to check')
+    print('Welcome to Farm Weather Window.')
+    print('A dedicated forecast based on farm activity.')
+    print('Please select the farm Weater forecast window to check:')
     print('')
     menu_options = {
         1: 'Silage Window',
@@ -31,27 +41,36 @@ def print_menu():
 
 
 def silage():
+    clean()
     """Silage forecast function"""
     print('Handle option \'Silage\'')
+    input("Press Enter to continue...")
 
 
 def hay():
+    clean()
     """Hay forecast function"""
     print('Handle option \'Hay\'')
+    input("Press Enter to continue...")
 
 
 def slurry():
+    clean()
     """Slurry forecast function"""
     print('Handle option \'Slurry\'')
+    input("Press Enter to continue...")
 
 
 def spray():
+    clean()
     """Spray forecast function"""
     print('Handle option \'Spray\'')
+    input("Press Enter to continue...")
 
 
 if __name__ == '__main__':
     while (True):
+        clean()
         print_menu()
         option = ''
         try:
