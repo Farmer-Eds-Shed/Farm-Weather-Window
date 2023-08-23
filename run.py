@@ -15,6 +15,7 @@ def owm_api():
 
 
 class forecast:
+    """class to build forecast object"""
     def __init__(self, day):
         dt = data['daily'][day]['dt']
         self.day = time.strftime('%A', time.localtime(dt))
@@ -47,7 +48,9 @@ def print_menu():
         3: 'Hay Window',
         4: 'Slurry Window',
         5: 'Spray Window',
-        6: 'Exit',
+        6: 'Refresh Weather Data',
+        7: 'Change Location',
+        8: 'Exit',
     }
     for key in menu_options.keys():
         print(key, '--', menu_options[key])
@@ -112,7 +115,11 @@ if __name__ == '__main__':
         elif option == 5:
             spray()
         elif option == 6:
+            owm_api()
+            print("Refreshing Weather Data")
+            time.sleep(3)
+        elif option == 8:
             print('End Program')
             exit()
         else:
-            print('Invalid option. Please enter a number between 1 and 5.')
+            print('Invalid option. Please enter a number between 1 and 8.')
