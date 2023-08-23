@@ -1,6 +1,7 @@
 import requests
 import os
 import json
+import time
 
 
 def owm_api():
@@ -9,8 +10,19 @@ def owm_api():
     lon = -6.6967
     api_key = os.getenv('OWM_API_KEY')
     response = requests.get(f"https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&appid={api_key}")
+    global data
     data = json.loads(response.text)
-    print(data["daily"][1]["rain"])
+
+
+class forecast:
+    def __init__(self, day):
+        dt = data['daily'][day]['dt']
+        self.day = time.strftime('%A', time.localtime(dt))
+        self.rain = data['daily'][day]['rain']
+        self.temp = data['daily'][day]['temp']['day']
+        self.wind = data['daily'][day]['wind_speed']
+        self.clouds = data['daily'][day]['clouds']
+        self.uvi = data['daily'][day]['uvi']
 
 
 def clean():
@@ -30,46 +42,57 @@ def print_menu():
     print('Please select the farm Weater forecast window to check:')
     print('')
     menu_options = {
-        1: 'Silage Window',
-        2: 'Hay Window',
-        3: 'Slurry Window',
-        4: 'Spray Window',
-        5: 'Exit',
+        1: 'Weather Forecast',
+        2: 'Silage Window',
+        3: 'Hay Window',
+        4: 'Slurry Window',
+        5: 'Spray Window',
+        6: 'Exit',
     }
     for key in menu_options.keys():
         print(key, '--', menu_options[key])
 
 
-def silage():
+def week_forecast():
+    """Main forecast function"""
     clean()
+    print(forecast(0).day)
+    print(f'rain {forecast(0).rain}')
+    print('Handle option \'Forecast\'')
+    input("Press Enter to continue...")
+
+
+def silage():
     """Silage forecast function"""
+    clean()
     print('Handle option \'Silage\'')
     input("Press Enter to continue...")
 
 
 def hay():
-    clean()
     """Hay forecast function"""
+    clean()
     print('Handle option \'Hay\'')
     input("Press Enter to continue...")
 
 
 def slurry():
-    clean()
     """Slurry forecast function"""
+    clean()
     print('Handle option \'Slurry\'')
     input("Press Enter to continue...")
 
 
 def spray():
-    clean()
     """Spray forecast function"""
+    clean()
     print('Handle option \'Spray\'')
     input("Press Enter to continue...")
 
 
 if __name__ == '__main__':
     while (True):
+        owm_api()
         clean()
         print_menu()
         option = ''
@@ -79,15 +102,17 @@ if __name__ == '__main__':
             print('Wrong input. Please enter a number ...')
         # Check what choice was entered and act accordingly
         if option == 1:
-            silage()
+            week_forecast()
         elif option == 2:
-            hay()
+            silage()
         elif option == 3:
-            slurry()
+            hay()
         elif option == 4:
-            spray()
+            slurry()
         elif option == 5:
+            spray()
+        elif option == 6:
             print('End Program')
             exit()
         else:
-            print('Invalid option. Please enter a number between 1 and 4.')
+            print('Invalid option. Please enter a number between 1 and 5.')
