@@ -4,10 +4,19 @@ import json
 import time
 
 
+def owm_location(town, cc):
+    """Open Weather Map Location API"""
+    api_key = os.getenv('OWM_API_KEY')
+    response = requests.get(f"https://api.openweathermap.org/geo/1.0/direct?q={town},{cc},ireland&appid={api_key}")
+    data = json.loads(response.text)
+    global lat
+    global lon
+    lat = data[0]['lat']
+    lon = data[0]['lon']
+
+
 def owm_api():
     """ Open Weather Map API"""
-    lat = 53.6471
-    lon = -6.6967
     api_key = os.getenv('OWM_API_KEY')
     response = requests.get(f"https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&appid={api_key}")
     global data
@@ -36,11 +45,11 @@ def clean():
         _ = os.system('clear')
 
 
-def print_menu():
+def print_menu(town):
     """Print the main Menu"""
     print('Welcome to Farm Weather Window.')
-    print('A dedicated forecast based on farm activity.')
-    print('Please select the farm Weater forecast window to check:')
+    print(f'A dedicated forecast for farm activity in {town}.')
+    print('Please select the farm weather forecast window to check:')
     print('')
     menu_options = {
         1: 'Weather Forecast',
@@ -49,8 +58,7 @@ def print_menu():
         4: 'Slurry Window',
         5: 'Spray Window',
         6: 'Refresh Weather Data',
-        7: 'Change Location',
-        8: 'Exit',
+        7: 'Exit',
     }
     for key in menu_options.keys():
         print(key, '--', menu_options[key])
@@ -95,9 +103,21 @@ def spray():
 
 if __name__ == '__main__':
     while (True):
+        town = input('Enter town name. (eg. Dublin)')
+        cc = input('Enter country code. (eg. ie)')
+        try:
+            owm_location(town, cc)
+            if town and cc != '':
+                break
+            else:
+                print("Town or Country cannot be blank")
+        except IndexError:
+            print("location not found")
+    # Enter location for weather forecast.
+    while (True):
         owm_api()
         clean()
-        print_menu()
+        print_menu(town)
         option = ''
         try:
             option = int(input('Enter your choice: '))
@@ -118,8 +138,8 @@ if __name__ == '__main__':
             owm_api()
             print("Refreshing Weather Data")
             time.sleep(3)
-        elif option == 8:
+        elif option == 7:
             print('End Program')
             exit()
         else:
-            print('Invalid option. Please enter a number between 1 and 8.')
+            print('Invalid option. Please enter a number between 1 and 7.')
