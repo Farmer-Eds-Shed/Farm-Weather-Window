@@ -2,6 +2,7 @@ import requests
 import os
 import json
 import time
+from texttable import Texttable
 
 
 def owm_location(town, cc):
@@ -28,7 +29,10 @@ class forecast:
     def __init__(self, day):
         dt = data['daily'][day]['dt']
         self.day = time.strftime('%A', time.localtime(dt))
-        self.rain = data['daily'][day]['rain']
+        try:
+            self.rain = data['daily'][day]['rain']
+        except KeyError:
+            self.rain = 0
         self.temp = data['daily'][day]['temp']['day']
         self.wind = data['daily'][day]['wind_speed']
         self.clouds = data['daily'][day]['clouds']
@@ -67,9 +71,50 @@ def print_menu(town):
 def week_forecast():
     """Main forecast function"""
     clean()
-    print(forecast(0).day)
-    print(f'rain {forecast(0).rain}')
-    print('Handle option \'Forecast\'')
+    t = Texttable()
+    t.add_rows([
+        [
+            '',
+            'Today',
+            'Tomorrow',
+            forecast(2).day,
+            forecast(3).day,
+            forecast(4).day,
+            forecast(5).day,
+            forecast(6).day
+            ],
+        [
+            'Rain mm',
+            forecast(0).rain,
+            forecast(1).rain,
+            forecast(2).rain,
+            forecast(3).rain,
+            forecast(4).rain,
+            forecast(5).rain,
+            forecast(6).rain
+            ],
+        [
+            'Cloud %',
+            forecast(0).clouds,
+            forecast(1).clouds,
+            forecast(2).clouds,
+            forecast(3).clouds,
+            forecast(4).clouds,
+            forecast(5).clouds,
+            forecast(6).clouds
+            ],
+        [
+            'Wind ms',
+            forecast(0).wind,
+            forecast(1).wind,
+            forecast(2).wind,
+            forecast(3).wind,
+            forecast(4).wind,
+            forecast(5).wind,
+            forecast(7).wind
+            ]
+        ])
+    print(t.draw())
     input("Press Enter to continue...")
 
 
