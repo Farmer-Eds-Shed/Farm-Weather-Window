@@ -53,7 +53,6 @@ def print_menu(town):
     """Print the main Menu"""
     print('Welcome to Farm Weather Window.')
     print(f'A dedicated forecast for farm activity in {town}.')
-    print('Please select the farm weather forecast window to check:')
     print('')
     menu_options = {
         1: 'Weather Forecast',
@@ -159,14 +158,19 @@ if __name__ == '__main__':
             if town and cc != '':
                 break
             else:
+                print("")
                 print("Town or Country cannot be blank")
+                time.sleep(1)
         except IndexError:
-            print("location not found")
+            print("")
+            print("location not found, Please try again")
+            time.sleep(1)
     # Enter location for weather forecast.
     owm_api()
     while (True):
         clean()
         print_menu(town)
+        print("")
         option = ''
         try:
             option = int(input('Enter your choice: '))
