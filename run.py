@@ -14,7 +14,7 @@ def owm_location(town, cc):
     global lon
     lat = data[0]['lat']
     lon = data[0]['lon']
-
+    
 
 def owm_api():
     """ Open Weather Map API"""
@@ -68,51 +68,53 @@ def print_menu(town):
         print(key, '--', menu_options[key])
 
 
+def days():
+    """7 Days function"""
+    days = ['', 'Today', 'Tomorrow'] + [forecast(i).day for i in range(2, 7)]
+    return days
+
+
+def rain():
+    """Rain 7 days"""
+    rain = ['rain mm'] + [forecast(i).rain for i in range(0, 7)]
+    return rain
+
+
+def clouds():
+    """Clouds 7 days"""
+    clouds = ['cloud %'] + [forecast(i).clouds for i in range(0, 7)]
+    return clouds
+
+
+def wind():
+    """Wind 7 days"""
+    wind = ['Wind ms'] + [forecast(i).wind for i in range(0, 7)]
+    return wind
+
+
+def temp():
+    """Temp 7 days"""
+    temp = ['Temp C'] + [forecast(i).temp for i in range(0, 7)]
+    return temp
+
+
+def uvi():
+    """UVI 7 days """
+    uvi = ['UVI'] + [forecast(i).uvi for i in range(0, 7)]
+    return uvi
+
+
 def week_forecast():
-    """Main forecast function"""
+    """Main weather forecast"""
     clean()
     t = Texttable()
     t.add_rows([
-        [
-            '',
-            'Today',
-            'Tomorrow',
-            forecast(2).day,
-            forecast(3).day,
-            forecast(4).day,
-            forecast(5).day,
-            forecast(6).day
-            ],
-        [
-            'Rain mm',
-            forecast(0).rain,
-            forecast(1).rain,
-            forecast(2).rain,
-            forecast(3).rain,
-            forecast(4).rain,
-            forecast(5).rain,
-            forecast(6).rain
-            ],
-        [
-            'Cloud %',
-            forecast(0).clouds,
-            forecast(1).clouds,
-            forecast(2).clouds,
-            forecast(3).clouds,
-            forecast(4).clouds,
-            forecast(5).clouds,
-            forecast(6).clouds
-            ],
-        [
-            'Wind ms',
-            forecast(0).wind,
-            forecast(1).wind,
-            forecast(2).wind,
-            forecast(3).wind,
-            forecast(4).wind,
-            forecast(5).wind,
-            forecast(7).wind
-            ]
+        days(),
+        temp(),
+        rain(),
+        clouds(),
+        wind(),
+        uvi()
         ])
     print(t.draw())
     input("Press Enter to continue...")
