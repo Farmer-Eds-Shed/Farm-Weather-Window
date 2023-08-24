@@ -19,7 +19,7 @@ def owm_location(town, cc):
 def owm_api():
     """ Open Weather Map API"""
     api_key = os.getenv('OWM_API_KEY')
-    response = requests.get(f"https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&appid={api_key}")
+    response = requests.get(f"https://api.openweathermap.org/data/2.5/onecall?units=metric&lat={lat}&lon={lon}&appid={api_key}")
     global data
     data = json.loads(response.text)
 
@@ -30,13 +30,13 @@ class forecast:
         dt = data['daily'][day]['dt']
         self.day = time.strftime('%A', time.localtime(dt))
         try:
-            self.rain = data['daily'][day]['rain']
+            self.rain = round(data['daily'][day]['rain'], 1)
         except KeyError:
             self.rain = 0
-        self.temp = data['daily'][day]['temp']['day']
-        self.wind = data['daily'][day]['wind_speed']
-        self.clouds = data['daily'][day]['clouds']
-        self.uvi = data['daily'][day]['uvi']
+        self.temp = round(data['daily'][day]['temp']['day'], 1)
+        self.wind = round(data['daily'][day]['wind_speed'], 1)
+        self.clouds = round(data['daily'][day]['clouds'], 1)
+        self.uvi = round(data['daily'][day]['uvi'], 1)
 
 
 def clean():
@@ -108,6 +108,7 @@ def week_forecast():
     """Main weather forecast"""
     clean()
     t = Texttable()
+    t.set_cols_dtype(['t', 't', 't', 't', 't', 't', 't', 't'])
     t.add_rows([
         days(),
         temp(),
@@ -150,6 +151,7 @@ def spray():
 
 if __name__ == '__main__':
     while (True):
+        clean()
         town = input('Enter town name. (eg. Dublin)')
         cc = input('Enter country code. (eg. ie)')
         try:
@@ -161,8 +163,8 @@ if __name__ == '__main__':
         except IndexError:
             print("location not found")
     # Enter location for weather forecast.
+    owm_api()
     while (True):
-        owm_api()
         clean()
         print_menu(town)
         option = ''
@@ -184,9 +186,10 @@ if __name__ == '__main__':
         elif option == 6:
             owm_api()
             print("Refreshing Weather Data")
-            time.sleep(3)
+            time.sleep(2)
         elif option == 7:
             print('End Program')
             exit()
         else:
             print('Invalid option. Please enter a number between 1 and 7.')
+            time.sleep(1)
