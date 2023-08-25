@@ -8,18 +8,24 @@ from texttable import Texttable
 def owm_location(town, cc):
     """Open Weather Map Location API"""
     api_key = os.getenv('OWM_API_KEY')
-    response = requests.get(f"https://api.openweathermap.org/geo/1.0/direct?q={town},{cc},ireland&appid={api_key}")
+    response = requests.get(
+        "https://api.openweathermap.org/geo/1.0/direct?"
+        f"q={town},{cc},ireland&appid={api_key}"
+        )
     data = json.loads(response.text)
     global lat
     global lon
     lat = data[0]['lat']
     lon = data[0]['lon']
-    
+
 
 def owm_api():
     """ Open Weather Map API"""
     api_key = os.getenv('OWM_API_KEY')
-    response = requests.get(f"https://api.openweathermap.org/data/2.5/onecall?units=metric&lat={lat}&lon={lon}&appid={api_key}")
+    response = requests.get(
+        "https://api.openweathermap.org/data/2.5/onecall?"
+        f"units=metric&lat={lat}&lon={lon}&appid={api_key}"
+        )
     global data
     data = json.loads(response.text)
 
@@ -30,12 +36,12 @@ class forecast:
         dt = data['daily'][day]['dt']
         self.day = time.strftime('%A', time.localtime(dt))
         try:
-            self.rain = round(data['daily'][day]['rain'], 1)
+            self.rain = round(data['daily'][day]["rain"], 1)
         except KeyError:
             self.rain = 0
         self.temp = round(data['daily'][day]['temp']['day'], 1)
         self.wind = round(data['daily'][day]['wind_speed'], 1)
-        self.clouds = round(data['daily'][day]['clouds'], 1)
+        self.clouds = data['daily'][day]['clouds']
         self.uvi = round(data['daily'][day]['uvi'], 1)
 
 
@@ -69,37 +75,37 @@ def print_menu(town):
 
 def days():
     """7 Days function"""
-    days = ['', 'Today', 'Tomorrow'] + [forecast(i).day for i in range(2, 7)]
+    days = ['Today', 'Tomorrow'] + [forecast(i).day for i in range(2, 7)]
     return days
 
 
 def rain():
     """Rain 7 days"""
-    rain = ['rain mm'] + [forecast(i).rain for i in range(0, 7)]
+    rain = [forecast(i).rain for i in range(0, 7)]
     return rain
 
 
 def clouds():
     """Clouds 7 days"""
-    clouds = ['cloud %'] + [forecast(i).clouds for i in range(0, 7)]
+    clouds = [forecast(i).clouds for i in range(0, 7)]
     return clouds
 
 
 def wind():
     """Wind 7 days"""
-    wind = ['Wind ms'] + [forecast(i).wind for i in range(0, 7)]
+    wind = [forecast(i).wind for i in range(0, 7)]
     return wind
 
 
 def temp():
     """Temp 7 days"""
-    temp = ['Temp C'] + [forecast(i).temp for i in range(0, 7)]
+    temp = [forecast(i).temp for i in range(0, 7)]
     return temp
 
 
 def uvi():
     """UVI 7 days """
-    uvi = ['UVI'] + [forecast(i).uvi for i in range(0, 7)]
+    uvi = [forecast(i).uvi for i in range(0, 7)]
     return uvi
 
 
@@ -109,12 +115,12 @@ def week_forecast():
     t = Texttable()
     t.set_cols_dtype(['t', 't', 't', 't', 't', 't', 't', 't'])
     t.add_rows([
-        days(),
-        temp(),
-        rain(),
-        clouds(),
-        wind(),
-        uvi()
+        [''] + days(),
+        ['Temp C'] + temp(),
+        ['rain mm'] + rain(),
+        ['cloud %'] + clouds(),
+        ['Wind ms'] + wind(),
+        ['UVI'] + uvi()
         ])
     print(t.draw())
     input("Press Enter to continue...")
@@ -160,11 +166,11 @@ if __name__ == '__main__':
             else:
                 print("")
                 print("Town or Country cannot be blank")
-                time.sleep(1)
+                time.sleep(2)
         except IndexError:
             print("")
             print("location not found, Please try again")
-            time.sleep(1)
+            time.sleep(2)
     # Enter location for weather forecast.
     owm_api()
     while (True):
@@ -196,4 +202,4 @@ if __name__ == '__main__':
             exit()
         else:
             print('Invalid option. Please enter a number between 1 and 7.')
-            time.sleep(1)
+            time.sleep(2)

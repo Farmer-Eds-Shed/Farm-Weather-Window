@@ -1,1 +1,4 @@
-# Your requirements go here
+geojson==2.5.0
+pyowm==3.3.0
+PySocks==1.7.1
+texttable==1.6.7
