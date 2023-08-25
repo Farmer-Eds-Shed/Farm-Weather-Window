@@ -2,7 +2,13 @@ import requests
 import os
 import json
 import time
+from colorama import init as colorama_init
+from colorama import Fore
+from colorama import Style
 from texttable import Texttable
+from art import *
+
+colorama_init()
 
 
 def owm_location(town, cc):
@@ -55,10 +61,35 @@ def clean():
         _ = os.system('clear')
 
 
-def print_menu(town):
+def set_location():
+    while (True):
+        clean()
+        tprint('~~~~Farm~~~~~~~~~~~', font="tarty3")
+        tprint('~~~~~~~Weather~~~~~', font="tarty3")
+        tprint('~~~~~~~~~~~~~Window', font="tarty3")
+        print("")
+        print("")
+        town = input('Enter town name. (eg. Dublin) ')
+        cc = input('Enter country code. (eg. ie) ')
+        try:
+            owm_location(town, cc)
+            if town and cc != '':
+                break
+            else:
+                print("")
+                print("Town or Country cannot be blank")
+                time.sleep(2)
+        except IndexError:
+            print("")
+            print("location not found, Please try again")
+            time.sleep(2)
+    return town
+
+
+def print_menu():
     """Print the main Menu"""
-    print('Welcome to Farm Weather Window.')
-    print(f'A dedicated forecast for farm activity in {town}.')
+    tprint('Farm Weather Window', font="straight")
+    print(f'A dedicated forecast for farm activity.')
     print('')
     menu_options = {
         1: 'Weather Forecast',
@@ -155,27 +186,11 @@ def spray():
 
 
 if __name__ == '__main__':
-    while (True):
-        clean()
-        town = input('Enter town name. (eg. Dublin)')
-        cc = input('Enter country code. (eg. ie)')
-        try:
-            owm_location(town, cc)
-            if town and cc != '':
-                break
-            else:
-                print("")
-                print("Town or Country cannot be blank")
-                time.sleep(2)
-        except IndexError:
-            print("")
-            print("location not found, Please try again")
-            time.sleep(2)
-    # Enter location for weather forecast.
+    set_location()
     owm_api()
     while (True):
         clean()
-        print_menu(town)
+        print_menu()
         print("")
         option = ''
         try:
