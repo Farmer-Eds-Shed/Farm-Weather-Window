@@ -4,6 +4,7 @@ import json
 import time
 from colorama import init as colorama_init
 from colorama import Fore
+from colorama import Back
 from colorama import Style
 from texttable import Texttable
 from art import *
@@ -147,6 +148,7 @@ def week_forecast():
     clean()
     t = Texttable()
     t.set_cols_dtype(['t', 't', 't', 't', 't', 't', 't', 't'])
+    print(Back.BLUE)
     t.add_rows([
         [''] + days(),
         ['Temp C'] + temp(),
@@ -156,6 +158,7 @@ def week_forecast():
         ['UVI'] + uvi()
         ])
     print(t.draw())
+    print(Style.RESET_ALL)
     input("Press Enter to continue...")
 
 
