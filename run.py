@@ -64,10 +64,11 @@ def clean():
 def set_location():
     while (True):
         clean()
+        print(Fore.GREEN)
         tprint('~~~~Farm~~~~~~~~~~~', font="tarty3")
         tprint('~~~~~~~Weather~~~~~', font="tarty3")
         tprint('~~~~~~~~~~~~~Window', font="tarty3")
-        print("")
+        print(Style.RESET_ALL)
         print("")
         town = input('Enter town name. (eg. Dublin) ')
         cc = input('Enter country code. (eg. ie) ')
@@ -88,9 +89,10 @@ def set_location():
 
 def print_menu():
     """Print the main Menu"""
+    print(Fore.YELLOW)
     tprint('Farm Weather Window', font="straight")
     print(f'A dedicated forecast for farm activity.')
-    print('')
+    print(Style.RESET_ALL)
     menu_options = {
         1: 'Weather Forecast',
         2: 'Silage Window',
