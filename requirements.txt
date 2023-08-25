@@ -1,3 +1,5 @@
+art==6.0
+colorama==0.4.6
 geojson==2.5.0
 pyowm==3.3.0
 PySocks==1.7.1
