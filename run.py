@@ -179,11 +179,15 @@ def silage():
     window = []
     for i in range(5):
         # checking the conditions
-        if rain()[i] <= 0.3 and rain()[i + 1] <= 0.3 and rain()[i + 2] <= 0.3:
+        if (
+            rain()[i] <= 0.3
+            and rain()[i + 1] <= 0.3
+            and rain()[i + 2] <= 0.3
+        ):
             window.append(i)
     d = window[0]
     t = Texttable()
-    t.set_cols_dtype(['t', 't', 't','t'])
+    t.set_cols_dtype(['t', 't', 't', 't'])
     print(Back.GREEN)
     t.add_rows([
         [''] + days()[d:d+3],
@@ -200,9 +204,43 @@ def silage():
 
 
 def hay():
-    """Hay forecast function"""
     clean()
-    print('Handle option \'Hay\'')
+    print('The next available window to make hay is:')
+    print('')
+    window = []
+    for i in range(3):
+        # checking the conditions
+        if (
+            rain()[i] <= 0.1
+            and rain()[i + 1] <= 0.1
+            and rain()[i + 2] <= 0.1
+            and rain()[i + 3] <= 0.1
+            and rain()[i + 4] <= 0.1
+        ):
+            window.append(i)
+    try:
+        d = window[0]
+        t = Texttable()
+        t.set_cols_dtype(['t', 't', 't', 't', 't', 't'])
+        print(Back.GREEN)
+        t.add_rows([
+            [''] + days()[d:d+5],
+            ['Temp C'] + temp()[d:d+5],
+            ['rain mm'] + rain()[d:d+5],
+            ['cloud %'] + clouds()[d:d+5],
+            ['Wind ms'] + wind()[d:d+5],
+            ['UVI'] + uvi()[d:d+5]
+            ])
+        print(t.draw())
+        print(Style.RESET_ALL)
+    except IndexError:
+        print(
+            Fore.BLACK +
+            Back.RED +
+            "Sorry no window available to make hay this week" +
+            Style.RESET_ALL
+            )
+    print('')
     input("Press Enter to continue...")
 
 
