@@ -174,7 +174,28 @@ def week_forecast():
 def silage():
     """Silage forecast function"""
     clean()
-    print('Handle option \'Silage\'')
+    print('The next available window to make silage is:')
+    print('')
+    window = []
+    for i in range(5):
+        # checking the conditions
+        if rain()[i] <= 0.3 and rain()[i + 1] <= 0.3 and rain()[i + 2] <= 0.3:
+            window.append(i)
+    d = window[0]
+    t = Texttable()
+    t.set_cols_dtype(['t', 't', 't','t'])
+    print(Back.GREEN)
+    t.add_rows([
+        [''] + days()[d:d+3],
+        ['Temp C'] + temp()[d:d+3],
+        ['rain mm'] + rain()[d:d+3],
+        ['cloud %'] + clouds()[d:d+3],
+        ['Wind ms'] + wind()[d:d+3],
+        ['UVI'] + uvi()[d:d+3]
+        ])
+    print(t.draw())
+    print(Style.RESET_ALL)
+    print('')
     input("Press Enter to continue...")
 
 
