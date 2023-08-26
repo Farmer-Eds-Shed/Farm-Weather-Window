@@ -63,6 +63,7 @@ def clean():
 
 
 def set_location():
+    """Print set location screen"""
     while (True):
         clean()
         print(Fore.GREEN)
@@ -151,8 +152,9 @@ def uvi():
 
 
 def week_forecast():
-    """Main weather forecast"""
+    """7 day weather forecast"""
     clean()
+    tprint('7 Day Forecast', font="straight")
     t = Texttable()
     t.set_cols_dtype(['t', 't', 't', 't', 't', 't', 't', 't'])
     print(Back.BLUE)
