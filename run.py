@@ -212,11 +212,12 @@ def silage():
 
 
 def hay():
+    """Hay forecast function"""
     clean()
     print('The next available window to make hay is:')
     print('')
     window = []
-    for i in range(3):
+    for i in range(6):
         # checking the conditions
         if (
             rain()[i] <= 0.1
@@ -255,7 +256,40 @@ def hay():
 def slurry():
     """Slurry forecast function"""
     clean()
-    print('Handle option \'Slurry\'')
+    print('The next available window to spread slurry is:')
+    print('')
+    window = []
+    for i in range(3):
+        # checking the conditions
+        if (
+            rain()[i] <= 0.5
+            and rain()[i + 1] <= 2
+
+        ):
+            window.append(i)
+    try:
+        d = window[0]
+        t = Texttable()
+        t.set_cols_dtype(['t', 't', 't'])
+        print(Back.GREEN)
+        t.add_rows([
+            [''] + days()[d:d+2],
+            ['Temp C'] + temp()[d:d+2],
+            ['rain mm'] + rain()[d:d+2],
+            ['cloud %'] + clouds()[d:d+2],
+            ['Wind ms'] + wind()[d:d+2],
+            ['UVI'] + uvi()[d:d+2]
+            ])
+        print(t.draw())
+        print(Style.RESET_ALL)
+    except IndexError:
+        print(
+            Fore.BLACK +
+            Back.RED +
+            "Sorry no window available to spread slurry this week" +
+            Style.RESET_ALL
+            )
+    print('')
     input("Press Enter to continue...")
 
 
