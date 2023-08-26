@@ -185,20 +185,28 @@ def silage():
             and rain()[i + 2] <= 0.3
         ):
             window.append(i)
-    d = window[0]
-    t = Texttable()
-    t.set_cols_dtype(['t', 't', 't', 't'])
-    print(Back.GREEN)
-    t.add_rows([
-        [''] + days()[d:d+3],
-        ['Temp C'] + temp()[d:d+3],
-        ['rain mm'] + rain()[d:d+3],
-        ['cloud %'] + clouds()[d:d+3],
-        ['Wind ms'] + wind()[d:d+3],
-        ['UVI'] + uvi()[d:d+3]
-        ])
-    print(t.draw())
-    print(Style.RESET_ALL)
+    try:
+        d = window[0]
+        t = Texttable()
+        t.set_cols_dtype(['t', 't', 't', 't'])
+        print(Back.GREEN)
+        t.add_rows([
+            [''] + days()[d:d+3],
+            ['Temp C'] + temp()[d:d+3],
+            ['rain mm'] + rain()[d:d+3],
+            ['cloud %'] + clouds()[d:d+3],
+            ['Wind ms'] + wind()[d:d+3],
+            ['UVI'] + uvi()[d:d+3]
+            ])
+        print(t.draw())
+        print(Style.RESET_ALL)
+    except IndexError:
+        print(
+            Fore.BLACK +
+            Back.RED +
+            "Sorry no window available to make silage this week" +
+            Style.RESET_ALL
+            )
     print('')
     input("Press Enter to continue...")
 
