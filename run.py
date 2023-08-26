@@ -217,7 +217,7 @@ def hay():
     print('The next available window to make hay is:')
     print('')
     window = []
-    for i in range(6):
+    for i in range(3):
         # checking the conditions
         if (
             rain()[i] <= 0.1
@@ -259,7 +259,7 @@ def slurry():
     print('The next available window to spread slurry is:')
     print('')
     window = []
-    for i in range(3):
+    for i in range(6):
         # checking the conditions
         if (
             rain()[i] <= 0.5
