@@ -79,11 +79,18 @@ def set_location():
                 break
             else:
                 print("")
-                print("Town or Country cannot be blank")
+                print(
+                    Fore.RED +
+                    "Town or Country cannot be blank."
+                    + Style.RESET_ALL
+                    )
                 time.sleep(2)
         except IndexError:
             print("")
-            print("location not found, Please try again")
+            print(
+                Fore.RED +
+                "location not found, Please try again."
+                + Style.RESET_ALL)
             time.sleep(2)
     return town
 
@@ -201,7 +208,10 @@ if __name__ == '__main__':
         try:
             option = int(input('Enter your choice: '))
         except ValueError:
-            print('Wrong input. Please enter a number ...')
+            print(
+                Fore.RED +
+                'Invalid input.'
+                + Style.RESET_ALL)
         # Check what choice was entered and act accordingly
         if option == 1:
             week_forecast()
@@ -221,5 +231,9 @@ if __name__ == '__main__':
             print('End Program')
             exit()
         else:
-            print('Invalid option. Please enter a number between 1 and 7.')
+            print(
+                Fore.RED +
+                'Please enter a number between 1 and 7.'
+                + Style.RESET_ALL
+                )
             time.sleep(2)
