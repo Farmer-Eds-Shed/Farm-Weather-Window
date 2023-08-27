@@ -235,6 +235,7 @@ def hay():
     Hay forecast function.
 
     Prints table if there are 5 dry consecutive days.
+    Prints warning if weather is to be overcast.
     """
     clean()
     print('The next available window to make hay is:')
@@ -253,6 +254,21 @@ def hay():
     print(Back.GREEN)
     try:
         table(windows[0], 5)
+        if (
+            (
+                clouds()[i] +
+                clouds()[i + 1] +
+                clouds()[i + 2] +
+                clouds()[i + 3] +
+                clouds()[i + 4]
+            )
+                / 5 >= 50
+        ):
+            print(
+                Back.RED +
+                "Warning: Overcast weather may require extra theading "
+                "and / or time."
+                )
     except IndexError:
         print(
             Fore.BLACK +
