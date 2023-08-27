@@ -251,19 +251,18 @@ def hay():
             and rain()[i + 4] <= 0.1
         ):
             windows.append(i)
+    cloud = (
+                int(clouds()[windows[0]]) +
+                int(clouds()[windows[0] + 1]) +
+                int(clouds()[windows[0] + 2]) +
+                int(clouds()[windows[0] + 3]) +
+                int(clouds()[windows[0] + 4])
+            )
+    print(cloud)
     print(Back.GREEN)
     try:
         table(windows[0], 5)
-        if (
-            (
-                clouds()[i] +
-                clouds()[i + 1] +
-                clouds()[i + 2] +
-                clouds()[i + 3] +
-                clouds()[i + 4]
-            )
-                / 5 >= 50
-        ):
+        if (cloud / 5 >= 50):
             print(
                 Back.RED +
                 "Warning: Overcast weather may require extra theading "
