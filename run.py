@@ -151,22 +151,31 @@ def uvi():
     return uvi
 
 
+def table(window, num_days):
+    """print table for weather window"""
+    t = Texttable()
+    data_type = ['t']
+    for _ in range(num_days):
+        data_type.append('t')
+    t.set_cols_dtype(data_type)  # format all cells as string
+    t.add_rows([
+        [''] + days()[window: window + num_days],
+        ['Temp C'] + temp()[window: window + num_days],
+        ['rain mm'] + rain()[window: window + num_days],
+        ['cloud %'] + clouds()[window: window + num_days],
+        ['Wind ms'] + wind()[window: window + num_days],
+        ['UVI'] + uvi()[window: window + num_days]
+        ])
+    print(t.draw())
+    print(Style.RESET_ALL)
+
+
 def week_forecast():
     """7 day weather forecast"""
     clean()
     tprint('7 Day Forecast', font="straight")
-    t = Texttable()
-    t.set_cols_dtype(['t', 't', 't', 't', 't', 't', 't', 't'])
     print(Back.BLUE)
-    t.add_rows([
-        [''] + days(),
-        ['Temp C'] + temp(),
-        ['rain mm'] + rain(),
-        ['cloud %'] + clouds(),
-        ['Wind ms'] + wind(),
-        ['UVI'] + uvi()
-        ])
-    print(t.draw())
+    table(0, 7)
     print(Style.RESET_ALL)
     input("Press Enter to continue...")
 
@@ -176,7 +185,7 @@ def silage():
     clean()
     print('The next available window to make silage is:')
     print('')
-    window = []
+    windows = []
     for i in range(5):
         # checking the conditions
         if (
@@ -184,30 +193,17 @@ def silage():
             and rain()[i + 1] <= 0.3
             and rain()[i + 2] <= 0.3
         ):
-            window.append(i)
+            windows.append(i)
+    print(Back.GREEN)
     try:
-        d = window[0]
-        t = Texttable()
-        t.set_cols_dtype(['t', 't', 't', 't'])
-        print(Back.GREEN)
-        t.add_rows([
-            [''] + days()[d:d+3],
-            ['Temp C'] + temp()[d:d+3],
-            ['rain mm'] + rain()[d:d+3],
-            ['cloud %'] + clouds()[d:d+3],
-            ['Wind ms'] + wind()[d:d+3],
-            ['UVI'] + uvi()[d:d+3]
-            ])
-        print(t.draw())
-        print(Style.RESET_ALL)
+        table(windows[0], 3)
     except IndexError:
         print(
             Fore.BLACK +
             Back.RED +
-            "Sorry no window available to make silage this week" +
-            Style.RESET_ALL
+            f"Sorry no window available to make silage this week"
             )
-    print('')
+    print(Style.RESET_ALL)
     input("Press Enter to continue...")
 
 
@@ -216,7 +212,7 @@ def hay():
     clean()
     print('The next available window to make hay is:')
     print('')
-    window = []
+    windows = []
     for i in range(3):
         # checking the conditions
         if (
@@ -226,30 +222,17 @@ def hay():
             and rain()[i + 3] <= 0.1
             and rain()[i + 4] <= 0.1
         ):
-            window.append(i)
+            windows.append(i)
+    print(Back.GREEN)
     try:
-        d = window[0]
-        t = Texttable()
-        t.set_cols_dtype(['t', 't', 't', 't', 't', 't'])
-        print(Back.GREEN)
-        t.add_rows([
-            [''] + days()[d:d+5],
-            ['Temp C'] + temp()[d:d+5],
-            ['rain mm'] + rain()[d:d+5],
-            ['cloud %'] + clouds()[d:d+5],
-            ['Wind ms'] + wind()[d:d+5],
-            ['UVI'] + uvi()[d:d+5]
-            ])
-        print(t.draw())
-        print(Style.RESET_ALL)
+        table(windows[0], 5)
     except IndexError:
         print(
             Fore.BLACK +
             Back.RED +
-            "Sorry no window available to make hay this week" +
-            Style.RESET_ALL
+            f"Sorry no window available to make hay this week"
             )
-    print('')
+    print(Style.RESET_ALL)
     input("Press Enter to continue...")
 
 
@@ -258,38 +241,24 @@ def slurry():
     clean()
     print('The next available window to spread slurry is:')
     print('')
-    window = []
+    windows = []
     for i in range(6):
         # checking the conditions
         if (
             rain()[i] <= 0.5
             and rain()[i + 1] <= 2
-
         ):
-            window.append(i)
+            windows.append(i)
+    print(Back.GREEN)
     try:
-        d = window[0]
-        t = Texttable()
-        t.set_cols_dtype(['t', 't', 't'])
-        print(Back.GREEN)
-        t.add_rows([
-            [''] + days()[d:d+2],
-            ['Temp C'] + temp()[d:d+2],
-            ['rain mm'] + rain()[d:d+2],
-            ['cloud %'] + clouds()[d:d+2],
-            ['Wind ms'] + wind()[d:d+2],
-            ['UVI'] + uvi()[d:d+2]
-            ])
-        print(t.draw())
-        print(Style.RESET_ALL)
+        table(windows[0], 2)
     except IndexError:
         print(
             Fore.BLACK +
             Back.RED +
-            "Sorry no window available to spread slurry this week" +
-            Style.RESET_ALL
+            f"Sorry no window available to spread slurry this week"
             )
-    print('')
+    print(Style.RESET_ALL)
     input("Press Enter to continue...")
 
 
