@@ -222,7 +222,6 @@ def silage():
         table(windows[0], 3)
     except IndexError:
         print(
-            Fore.BLACK +
             Back.RED +
             "Sorry no window available to make silage this week."
             )
@@ -251,17 +250,17 @@ def hay():
             and rain()[i + 4] <= 0.1
         ):
             windows.append(i)
-    cloud = (
+    
+    print(Back.GREEN)
+    try:
+        table(windows[0], 5)
+        cloud = (
                 int(clouds()[windows[0]]) +
                 int(clouds()[windows[0] + 1]) +
                 int(clouds()[windows[0] + 2]) +
                 int(clouds()[windows[0] + 3]) +
                 int(clouds()[windows[0] + 4])
             )
-    print(cloud)
-    print(Back.GREEN)
-    try:
-        table(windows[0], 5)
         if (cloud / 5 >= 50):
             print(
                 Back.RED +
@@ -270,7 +269,6 @@ def hay():
                 )
     except IndexError:
         print(
-            Fore.BLACK +
             Back.RED +
             "Sorry no window available to make hay this week."
             )
@@ -301,7 +299,6 @@ def slurry():
         table(windows[0], 2)
     except IndexError:
         print(
-            Fore.BLACK +
             Back.RED +
             "Sorry no window available to spread slurry this week."
             )
@@ -333,7 +330,6 @@ def spray():
         table(windows[0], 2)
     except IndexError:
         print(
-            Fore.BLACK +
             Back.RED +
             "Sorry no window available to spray this week."
             )
