@@ -11,28 +11,38 @@ from art import *
 
 colorama_init()
 
-
 def owm_location(town, cc):
     """Open Weather Map Location API"""
     api_key = os.getenv('OWM_API_KEY')
-    response = requests.get(
-        "https://api.openweathermap.org/geo/1.0/direct?"
-        f"q={town},{cc},ireland&appid={api_key}"
-        )
+    try:
+        response = requests.get(
+            "https://api.openweathermap.org/geo/1.0/direct?"
+            f"q={town},{cc},ireland&appid={api_key}"
+            )
+        response.raise_for_status()
+    except requests.exceptions.HTTPError as e:
+        raise SystemExit("Connection Error: please try again later.")
+    except requests.exceptions.RequestException as e:
+        raise SystemExit(response.text)
     data = json.loads(response.text)
     global lat
     global lon
     lat = data[0]['lat']
     lon = data[0]['lon']
 
-
 def owm_api():
     """ Open Weather Map API"""
     api_key = os.getenv('OWM_API_KEY')
-    response = requests.get(
-        "https://api.openweathermap.org/data/2.5/onecall?"
-        f"units=metric&lat={lat}&lon={lon}&appid={api_key}"
-        )
+    try:    
+        response = requests.get(
+            "https://api.openweathermap.org/data/2.5/onecall?"
+            f"units=metric&lat={lat}&lon={lon}&appid={api_key}"
+            )
+        response.raise_for_status()
+    except requests.exceptions.HTTPError as e:
+        raise SystemExit(response.text)
+    except requests.exceptions.RequestException as e:
+        raise SystemExit("Connection Error: please try again later.")
     global data
     data = json.loads(response.text)
 
