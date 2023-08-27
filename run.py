@@ -211,7 +211,7 @@ def silage():
         print(
             Fore.BLACK +
             Back.RED +
-            f"Sorry no window available to make silage this week"
+            f"Sorry no window available to make silage this week."
             )
     print(Style.RESET_ALL)
     input("Press Enter to continue...")
@@ -240,7 +240,7 @@ def hay():
         print(
             Fore.BLACK +
             Back.RED +
-            f"Sorry no window available to make hay this week"
+            f"Sorry no window available to make hay this week."
             )
     print(Style.RESET_ALL)
     input("Press Enter to continue...")
@@ -266,7 +266,7 @@ def slurry():
         print(
             Fore.BLACK +
             Back.RED +
-            f"Sorry no window available to spread slurry this week"
+            f"Sorry no window available to spread slurry this week."
             )
     print(Style.RESET_ALL)
     input("Press Enter to continue...")
@@ -275,7 +275,28 @@ def slurry():
 def spray():
     """Spray forecast function"""
     clean()
-    print('Handle option \'Spray\'')
+    print('The next available window to spray is:')
+    print('')
+    windows = []
+    for i in range(6):
+        # checking the conditions
+        if (
+            rain()[i] <= 0.5
+            and rain()[i + 1] <= 2
+            and wind()[i] <= 7
+            and wind()[i + 1] <= 7
+        ):
+            windows.append(i)
+    print(Back.GREEN)
+    try:
+        table(windows[0], 2)
+    except IndexError:
+        print(
+            Fore.BLACK +
+            Back.RED +
+            f"Sorry no window available to spray this week."
+            )
+    print(Style.RESET_ALL)
     input("Press Enter to continue...")
 
 
