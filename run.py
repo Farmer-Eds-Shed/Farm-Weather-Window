@@ -1,3 +1,4 @@
+"""Farm Weather Window."""
 import requests
 import os
 import json
@@ -7,12 +8,11 @@ from colorama import Fore
 from colorama import Back
 from colorama import Style
 from texttable import Texttable
-from art import *
+from art import tprint
 
-colorama_init()
 
 def owm_location(town, cc):
-    """Open Weather Map Location API"""
+    """Open Weather Map Location API."""
     api_key = os.getenv('OWM_API_KEY')
     try:
         response = requests.get(
@@ -30,10 +30,11 @@ def owm_location(town, cc):
     lat = data[0]['lat']
     lon = data[0]['lon']
 
+
 def owm_api():
-    """ Open Weather Map API"""
+    """Open Weather Map API."""
     api_key = os.getenv('OWM_API_KEY')
-    try:    
+    try:
         response = requests.get(
             "https://api.openweathermap.org/data/2.5/onecall?"
             f"units=metric&lat={lat}&lon={lon}&appid={api_key}"
@@ -47,9 +48,11 @@ def owm_api():
     data = json.loads(response.text)
 
 
-class forecast:
-    """class to build forecast object"""
+class Forecast:
+    """class to build forecast object."""
+
     def __init__(self, day):
+        """Map API variables."""
         dt = data['daily'][day]['dt']
         self.day = time.strftime('%A', time.localtime(dt))
         try:
@@ -63,7 +66,7 @@ class forecast:
 
 
 def clean():
-    """Clear the Screen"""
+    """Clear the Screen."""
     # For Windows
     if os.name == 'nt':
         _ = os.system('cls')
@@ -73,7 +76,7 @@ def clean():
 
 
 def set_location():
-    """Print set location screen"""
+    """Print set location screen."""
     while (True):
         clean()
         print(Fore.GREEN)
@@ -107,10 +110,10 @@ def set_location():
 
 
 def print_menu():
-    """Print the main Menu"""
+    """Print the main Menu."""
     print(Fore.YELLOW)
     tprint('Farm Weather Window', font="straight")
-    print(f'A dedicated forecast by farm activity.')
+    print('A dedicated forecast by farm activity.')
     print(Style.RESET_ALL)
     menu_options = {
         1: 'Weather Forecast',
@@ -127,43 +130,47 @@ def print_menu():
 
 
 def days():
-    """7 Days function"""
-    days = ['Today', 'Tomorrow'] + [forecast(i).day for i in range(2, 7)]
+    """7 Days function."""
+    days = ['Today', 'Tomorrow'] + [Forecast(i).day for i in range(2, 7)]
     return days
 
 
 def rain():
-    """Rain 7 days"""
-    rain = [forecast(i).rain for i in range(0, 7)]
+    """Rain 7 days."""
+    rain = [Forecast(i).rain for i in range(0, 7)]
     return rain
 
 
 def clouds():
-    """Clouds 7 days"""
-    clouds = [forecast(i).clouds for i in range(0, 7)]
+    """Clouds 7 days."""
+    clouds = [Forecast(i).clouds for i in range(0, 7)]
     return clouds
 
 
 def wind():
-    """Wind 7 days"""
-    wind = [forecast(i).wind for i in range(0, 7)]
+    """Wind 7 days."""
+    wind = [Forecast(i).wind for i in range(0, 7)]
     return wind
 
 
 def temp():
-    """Temp 7 days"""
-    temp = [forecast(i).temp for i in range(0, 7)]
+    """Temp 7 days."""
+    temp = [Forecast(i).temp for i in range(0, 7)]
     return temp
 
 
 def uvi():
-    """UVI 7 days """
-    uvi = [forecast(i).uvi for i in range(0, 7)]
+    """UVI 7 days."""
+    uvi = [Forecast(i).uvi for i in range(0, 7)]
     return uvi
 
 
 def table(window, num_days):
-    """print table for weather window"""
+    """
+    Print table for weather window.
+
+    Takes 2 Parameters for Start of Window and Number of days.
+    """
     t = Texttable()
     data_type = ['t']
     for _ in range(num_days):
@@ -182,7 +189,7 @@ def table(window, num_days):
 
 
 def week_forecast():
-    """7 day weather forecast"""
+    """7 day weather forecast."""
     clean()
     tprint('7 Day Forecast', font="straight")
     print(Back.BLUE)
@@ -192,7 +199,12 @@ def week_forecast():
 
 
 def silage():
-    """Silage forecast function"""
+    """
+    Silage forecast function.
+
+    Prints table if there are 3 consecutive days.
+    with less than 0.3mm of rain.
+    """
     clean()
     print('The next available window to make silage is:')
     print('')
@@ -212,14 +224,18 @@ def silage():
         print(
             Fore.BLACK +
             Back.RED +
-            f"Sorry no window available to make silage this week."
+            "Sorry no window available to make silage this week."
             )
     print(Style.RESET_ALL)
     input("Press Enter to continue...")
 
 
 def hay():
-    """Hay forecast function"""
+    """
+    Hay forecast function.
+
+    Prints table if there are 5 dry consecutive days.
+    """
     clean()
     print('The next available window to make hay is:')
     print('')
@@ -241,14 +257,19 @@ def hay():
         print(
             Fore.BLACK +
             Back.RED +
-            f"Sorry no window available to make hay this week."
+            "Sorry no window available to make hay this week."
             )
     print(Style.RESET_ALL)
     input("Press Enter to continue...")
 
 
 def slurry():
-    """Slurry forecast function"""
+    """
+    Slurry forecast function.
+
+    Prints table if there is a day with less than 0.5mm of rain
+    followed ba a day with less than 2mm.
+    """
     clean()
     print('The next available window to spread slurry is:')
     print('')
@@ -267,14 +288,19 @@ def slurry():
         print(
             Fore.BLACK +
             Back.RED +
-            f"Sorry no window available to spread slurry this week."
+            "Sorry no window available to spread slurry this week."
             )
     print(Style.RESET_ALL)
     input("Press Enter to continue...")
 
 
 def spray():
-    """Spray forecast function"""
+    """
+    Spray forecast function.
+
+    Prints table if there is a day with less than 0.5mm of rain
+    and wind speed below 5 ms followed by a day with less than 2mm.
+    """
     clean()
     print('The next available window to spray is:')
     print('')
@@ -284,8 +310,7 @@ def spray():
         if (
             rain()[i] <= 0.5
             and rain()[i + 1] <= 2
-            and wind()[i] <= 7
-            and wind()[i + 1] <= 7
+            and wind()[i] <= 5
         ):
             windows.append(i)
     print(Back.GREEN)
@@ -295,13 +320,14 @@ def spray():
         print(
             Fore.BLACK +
             Back.RED +
-            f"Sorry no window available to spray this week."
+            "Sorry no window available to spray this week."
             )
     print(Style.RESET_ALL)
     input("Press Enter to continue...")
 
 
 if __name__ == '__main__':
+    colorama_init()
     set_location()
     owm_api()
     while (True):
