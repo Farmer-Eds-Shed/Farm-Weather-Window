@@ -20,10 +20,10 @@ def owm_location(town, cc):
             f"q={town},{cc},ireland&appid={api_key}"
             )
         response.raise_for_status()
-    except requests.exceptions.HTTPError as e:
-        raise SystemExit("Connection Error: please try again later.")
-    except requests.exceptions.RequestException as e:
+    except requests.exceptions.HTTPError:
         raise SystemExit(response.text)
+    except requests.exceptions.RequestException:
+        raise SystemExit("Connection Error: please try again later.")
     data = json.loads(response.text)
     global lat
     global lon
@@ -39,9 +39,9 @@ def owm_api():
             f"units=metric&lat={lat}&lon={lon}&appid={api_key}"
             )
         response.raise_for_status()
-    except requests.exceptions.HTTPError as e:
+    except requests.exceptions.HTTPError:
         raise SystemExit(response.text)
-    except requests.exceptions.RequestException as e:
+    except requests.exceptions.RequestException:
         raise SystemExit("Connection Error: please try again later.")
     global data
     data = json.loads(response.text)
@@ -110,7 +110,7 @@ def print_menu():
     """Print the main Menu"""
     print(Fore.YELLOW)
     tprint('Farm Weather Window', font="straight")
-    print(f'A dedicated forecast for farm activity.')
+    print(f'A dedicated forecast by farm activity.')
     print(Style.RESET_ALL)
     menu_options = {
         1: 'Weather Forecast',
@@ -118,8 +118,9 @@ def print_menu():
         3: 'Hay Window',
         4: 'Slurry Window',
         5: 'Spray Window',
-        6: 'Refresh Weather Data',
-        7: 'Exit',
+        6: 'Change Location',
+        7: 'Refresh Weather Data',
+        8: 'Exit',
     }
     for key in menu_options.keys():
         print(key, '--', menu_options[key])
@@ -327,16 +328,21 @@ if __name__ == '__main__':
         elif option == 5:
             spray()
         elif option == 6:
+            set_location()
             owm_api()
             print("Refreshing Weather Data")
             time.sleep(2)
         elif option == 7:
+            owm_api()
+            print("Refreshing Weather Data")
+            time.sleep(2)
+        elif option == 8:
             print('End Program')
             exit()
         else:
             print(
                 Fore.RED +
-                'Please enter a number between 1 and 7.'
+                'Please enter a number between 1 and 8.'
                 + Style.RESET_ALL
                 )
             time.sleep(2)
