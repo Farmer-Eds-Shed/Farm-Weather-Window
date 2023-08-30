@@ -90,31 +90,43 @@ Then functions for each farm activity iterate through the lists and build the we
 
 ### PEP8 Testing
 
+Ran code through [CI Python Linter](https://pep8ci.herokuapp.com/) with no issues.
 
 ### Input Testing
 All user inputs were tested thoroughly to ensure all input data is handled correctly and appropriate feedback is given to the user as follows:
 
+Set location blank entries - Returns 'Town or country cannot be blank'
+Set location invalid location or country code - Returns 'Loction Not found, Please try again'
+Main menu enter non numeric charecters - Returns 'Invalid Input', 'Please enter a number between 1 and 8'
+Main menu enter number not between 1 and 8 - Returns 'Please enter a number between 1 and 8'
+Check Each menu option 1 to 8 - All behave as expected.
 
+### API Testing
+Test API unreachable - Returns 'Connection Error: please try again later.'
+Test Invalid API key - Returns 'Invalid API key. Please see https://openweathermap.org/faq#error401 for more info.'
 
+### Functionality testing
+Tested each forecast window using different regions in order to produce an available window.
+Tested each forecast window using different regions in order to no window available message. 
 
-### Other Testing
+## Fixed Bugs
 
 ## Libraries and Technologies Used
 
 ### Python Libraries:
-
-
+Requests
+Os
+Json
+Time
+Colorama
+Texttable
+Art
 
 ### Programs Used
-
-
-
-
-## Known Bugs
-
-
-
-## Fixed Bugs
+GIT
+Code Anywhere
+Heroku
+Node-Red
 
 
 
@@ -129,6 +141,7 @@ Before deploying to Heroku pip3 freeze > requirements.txt was used to add all th
 
 ## Credits 
 ### Resources Used
+
 
 
 ## Acknowledgments
