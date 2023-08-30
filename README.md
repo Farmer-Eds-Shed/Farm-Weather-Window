@@ -95,39 +95,36 @@ Ran code through [CI Python Linter](https://pep8ci.herokuapp.com/) with no issue
 ### Input Testing
 All user inputs were tested thoroughly to ensure all input data is handled correctly and appropriate feedback is given to the user as follows:
 
-Set location blank entries - Returns 'Town or country cannot be blank' :white_check_mark: <br>
-Set location invalid location or country code - Returns 'Loction Not found, Please try again' :white_check_mark: <br>
-Main menu enter non numeric charecters - Returns 'Invalid Input', 'Please enter a number between 1 and 8' :white_check_mark: <br>
-Main menu enter number not between 1 and 8 - Returns 'Please enter a number between 1 and 8' :white_check_mark: <br>
-Check Each menu option 1 to 8 - All behave as expected. :white_check_mark: <br>
+:white_check_mark:Set location blank entries - Returns 'Town or country cannot be blank'  <br>
+:white_check_mark:Set location invalid location or country code - Returns 'Loction Not found, Please try again' <br>
+:white_check_mark:Main menu enter non numeric charecters - Returns 'Invalid Input', 'Please enter a number between 1 and 8' <br>
+:white_check_mark: Main menu enter number not between 1 and 8 - Returns 'Please enter a number between 1 and 8' <br>
+:white_check_mark: Check Each menu option 1 to 8 - All behave as expected.  <br>
 
 ### API Testing
-Test API unreachable - Returns 'Connection Error: please try again later.' :white_check_mark: <br>
-Test Invalid API key - Returns 'Invalid API key. Please see https://openweathermap.org/faq#error401 for more info.' :white_check_mark:<br>
+:white_check_mark: Test API unreachable - Returns 'Connection Error: please try again later.' <br>
+:white_check_mark: Test Invalid API key - Returns 'Invalid API key. Please see https://openweathermap.org/faq#error401 for more info.' <br>
 
 ### Functionality testing
-Tested each forecast window using different regions in order to produce an available window. :white_check_mark: <br>
-Tested each forecast window using different regions in order to no window available message.  :white_check_mark: <br>
-
-## Fixed Bugs
+:white_check_mark: Tested each forecast window using different regions in order to produce an available window.<br>
+:white_check_mark: Tested each forecast window using different regions in order to no window available message.   <br>
 
 ## Libraries and Technologies Used
 
 ### Python Libraries:
-Requests
-Os
-Json
-Time
-Colorama
-Texttable
-Art
+Requests - Used for API requests.
+Os - Used for OS interactions.
+Json - Used to handle json formatted data from the API.
+Time - Used to convert timestamps to days.
+Colorama - Used to add color.
+Texttable - Used to build tables for weather forecasts.
+Art - Used to create larege fonts.
 
 ### Programs Used
-GIT
-Code Anywhere
-Heroku
-Node-Red
-
+GIT - Code Repo
+Code Anywhere - IDE
+Heroku - Deployment
+Node-Red - Experimentation with API requests.
 
 
 ## Deployment
@@ -137,10 +134,12 @@ The site was deployed via [Heroku](https://dashboard.heroku.com/apps), and the l
 Before deploying to Heroku pip3 freeze > requirements.txt was used to add all the dependencies required to the requirements.txt file.
 
 
-
-
 ## Credits 
+https://www.codingninjas.com/studio/library/how-to-clear-a-screen-in-python
+https://computinglearner.com/how-to-create-a-menu-for-a-python-console-application/?utm_content=cmp-true
+
 ### Resources Used
+
 
 
 
