@@ -5,38 +5,36 @@ Live Site: [Farm Weather Window](https://farm-weather-window-7024a2604c2c.heroku
 
 ![Main Menu](docs/readme_imgs/main_menu.png)
 
-## How to Use
-
-## Site Owner Goals
-
-## User Stories
-
-- ### As a user I want to:
-
-
-
-## Logic Flow
-
-
 ## Features
+
 
 ### Set Location
 
+![Set Location](docs/readme_imgs/set_location.png)
 
 ### Options menu
 
+![Main Menu](docs/readme_imgs/main_menu.png)
 
+### Weather Forecast
 
+![Forecast](docs/readme_imgs/forecast.png)
 
-### Input Validation and Error Handling
+### Silage Window
 
+![Silage Forecast](docs/readme_imgs/silage_forecast.png)
 
+### Hay Window
 
-### OWM API
+![Hay Forecast](docs/readme_imgs/hay_forecast.png)
 
+### Slurry Window
 
+![Slurry Forecast](docs/readme_imgs/slurry_forecast.png)
 
+### Spray Window
 
+![Spray Forecast](docs/readme_imgs/spray_forecast.png)
 
 ### Future Features
 
