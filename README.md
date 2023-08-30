@@ -1,6 +1,9 @@
 # Farm Weather Window
+Farm Weather Window is a forecast tool to predict windows in the coming week to perform specific farm tasks. Many farm tasks have specific weather requirements including wind, percipitation levels and cloudcover.
 
 Live Site: [Farm Weather Window](https://farm-weather-window-7024a2604c2c.herokuapp.com/)
+
+![Main Menu](docs/readme_imgs/main_menu.png)
 
 ## How to Use
 
