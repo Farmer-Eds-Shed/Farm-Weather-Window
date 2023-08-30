@@ -7,7 +7,7 @@ Live Site: [Farm Weather Window](https://farm-weather-window-7024a2604c2c.heroku
 
 ## Features
 
-### Title and Set Location scrren
+### Title and Set Location Screen
 
 On first loading of the program the user is prompted for a town name and country code.
 This uses the Open Weather Map Geolocation API to determin latitude and longitude for the main Forecast API.
@@ -56,7 +56,7 @@ Otherwise will state that there is no window available in the comming week.
 
 ### Spray Window
 
-Spraying requires low rainfall and very little wind.
+Spraying requires low rainfall and very little wind, there should also be low rainfall on the following day.
 If available the Spray Window option will show the next weather window for spraying crops.
 Otherwise will state that there is no window available in the comming week.
 
@@ -67,7 +67,7 @@ Otherwise will state that there is no window available in the comming week.
 This program works as a proof of concept but I have delibretly left out some features to simplify the demonstration.
 
 - Seasons, you can't make hay in winter in Ireland, but additional variables like seasons or hours of day light would make demonstration of the app imposible outside of the summer months.
-- Multiple overlapping windows per week are possible and are currently stored in a list but I've choosen not to display due to the limited space on an 80 X 24 charecter terminal but would make mor sense if this project were converted to a backend for a web app.
+- Multiple overlapping windows per week are possible and are currently stored in a list but I've choosen not to display due to the limited space on an 80 X 24 charecter terminal but would make more sense if this project were converted to a backend for a web app.
 
 Some additional future features should also include.
 
@@ -75,8 +75,15 @@ Some additional future features should also include.
 - Additional farming tasks.
 
 
-
 ## Data Model
+
+The weather forecast data is recieved as json formatted data from the Open Weather Map API.
+Farm Weather Window uses the Forecast class to extract the nessacery weather data.
+
+Functions that call the Forecast class are used to build lists containing 7 days of data for each weather type.
+
+Then functions for each farm activity iterate through the lists and build the weather forecast tables based on their individual condition statements.
+
 
 
 ## Testing
