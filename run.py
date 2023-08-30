@@ -249,7 +249,7 @@ def hay():
             and rain()[i + 3] <= 0.1
             and rain()[i + 4] <= 0.1
         ):
-            windows.append(i) 
+            windows.append(i)
     print(Back.GREEN)
     try:
         table(windows[0], 5)
