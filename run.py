@@ -65,6 +65,8 @@ class Forecast:
         self.uvi = round(data['daily'][day]['uvi'], 1)
 
 
+# Clean screen taken from:
+# https://www.codingninjas.com/studio/library/how-to-clear-a-screen-in-python
 def clean():
     """Clear the Screen."""
     # For Windows
@@ -336,7 +338,9 @@ def spray():
     input("Press Enter to continue...")
 
 
-if __name__ == '__main__': 
+# Main menu based on:
+# https://computinglearner.com/how-to-create-a-menu-for-a-python-console-application/?utm_content=cmp-true
+if __name__ == '__main__':
     colorama_init()
     set_location()
     owm_api()
