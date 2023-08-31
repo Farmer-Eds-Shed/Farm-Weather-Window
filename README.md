@@ -114,7 +114,7 @@ All user inputs were tested thoroughly to ensure all input data is handled corre
 ### Fixed Bugs
 
 - Overcast warning: - Equation missing parentheses.
-- Hay date range: - Range to large for 7 day forecast causing program to crash.
+- Hay date range: - Range too large for 7 day forecast causing program to crash as data not available.
 
 ### Unfixed Bugs
 
@@ -158,3 +158,5 @@ All user inputs were tested thoroughly to ensure all input data is handled corre
 - [codingninjas.com](https://www.codingninjas.com/studio/library/how-to-clear-a-screen-in-python) - Clear screen function
 - [computinglearner.com](https://computinglearner.com/how-to-create-a-menu-for-a-python-console-application/?utm_content=cmp-true) - Main menu
 - [Code Institute](https://github.com/Code-Institute-Org/python-essentials-template) - Python Essentials Template
+- [Stack Overflow](https://stackoverflow.com/) - General
+- [W3 Schools](https://www.w3schools.com/python/default.asp) - General
