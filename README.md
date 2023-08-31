@@ -95,9 +95,9 @@ Ran code through [CI Python Linter](https://pep8ci.herokuapp.com/) with no issue
 ### Input Testing
 All user inputs were tested thoroughly to ensure all input data is handled correctly and appropriate feedback is given to the user as follows:
 
-:white_check_mark:Set location blank entries - Returns 'Town or country cannot be blank'  <br>
-:white_check_mark:Set location invalid location or country code - Returns 'Loction Not found, Please try again' <br>
-:white_check_mark:Main menu enter non numeric charecters - Returns 'Invalid Input', 'Please enter a number between 1 and 8' <br>
+:white_check_mark: Set location blank entries - Returns 'Town or country cannot be blank'  <br>
+:white_check_mark: Set location invalid location or country code - Returns 'Loction Not found, Please try again' <br>
+:white_check_mark: Main menu enter non numeric charecters - Returns 'Invalid Input', 'Please enter a number between 1 and 8' <br>
 :white_check_mark: Main menu enter number not between 1 and 8 - Returns 'Please enter a number between 1 and 8' <br>
 :white_check_mark: Check Each menu option 1 to 8 - All behave as expected.  <br>
 
@@ -107,21 +107,21 @@ All user inputs were tested thoroughly to ensure all input data is handled corre
 
 ### Functionality testing
 :white_check_mark: Tested each forecast window using different regions in order to produce an available window.<br>
-:white_check_mark: Tested each forecast window using different regions in order to no window available message.   <br>
+:white_check_mark: Tested each forecast window using different regions in order to produce no window available message.   <br>
 
 ## Libraries and Technologies Used
 
 ### Python Libraries:
-Requests - Used for API requests.
-Os - Used for OS interactions.
-Json - Used to handle json formatted data from the API.
-Time - Used to convert timestamps to days.
-Colorama - Used to add color.
-Texttable - Used to build tables for weather forecasts.
-Art - Used to create larege fonts.
+[Requests](https://pypi.org/project/requests/) - Used for API requests. <br>
+[Os](https://docs.python.org/3/library/os.html) - Used for OS interactions. <br>
+[Json](https://docs.python.org/3/library/json.html) - Used to handle json formatted data from the API. <br>
+[Time](https://docs.python.org/3/library/time.html) - Used to convert timestamps to days. <br>
+[Colorama](https://pypi.org/project/colorama/) - Used to add color. <br>
+[Texttable](https://pypi.org/project/texttable/) - Used to build tables for weather forecasts. <br>
+[Art](https://pypi.org/project/art/) - Used to create larege fonts. <br>
 
-### Programs Used
-GIT - Code Repo
+### Tools Used
+GitHub - Code Repo
 Code Anywhere - IDE
 Heroku - Deployment
 Node-Red - Experimentation with API requests.
@@ -129,14 +129,25 @@ Node-Red - Experimentation with API requests.
 
 ## Deployment
 
-The site was deployed via [Heroku](https://dashboard.heroku.com/apps), and the live link can be found here: 
+The site was deployed via [Heroku](https://dashboard.heroku.com/apps) using Code Institutes mock terminal, and the live link can be found [here:](https://farm-weather-window-7024a2604c2c.herokuapp.com/) 
 
 Before deploying to Heroku pip3 freeze > requirements.txt was used to add all the dependencies required to the requirements.txt file.
 
+- Steps for deployment:
+    - Fork or clone this repository
+    - Create a new Heroku app
+    - Set the buildbacks to ```Python``` and ```NodeJS``` in that order
+    - Add config var Port = 8000
+    - Add config var OWM_API_KEY = 'Your API Key'
+    - Link the Heroku app to the repository
+    - Click on **Deploy**
+
+
+
 
 ## Credits 
-https://www.codingninjas.com/studio/library/how-to-clear-a-screen-in-python
-https://computinglearner.com/how-to-create-a-menu-for-a-python-console-application/?utm_content=cmp-true
+[codingninjas.com](https://www.codingninjas.com/studio/library/how-to-clear-a-screen-in-python) - Clear screen function
+[computinglearner.com](https://computinglearner.com/how-to-create-a-menu-for-a-python-console-application/?utm_content=cmp-true) - Main menu
 
 ### Resources Used
 
