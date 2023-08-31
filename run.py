@@ -336,7 +336,7 @@ def spray():
     input("Press Enter to continue...")
 
 
-if __name__ == '__main__':
+if __name__ == '__main__': 
     colorama_init()
     set_location()
     owm_api()

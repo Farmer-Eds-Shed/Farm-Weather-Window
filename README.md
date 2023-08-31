@@ -77,7 +77,7 @@ Some additional future features should also include.
 
 ## Data Model
 
-The weather forecast data is recieved as json formatted data from the Open Weather Map API.
+The weather forecast data is recieved as json formatted data from the Open Weather Map API. <br>
 Farm Weather Window uses the Forecast class to extract the nessacery weather data.
 
 Functions that call the Forecast class are used to build lists containing 7 days of data for each weather type.
@@ -112,26 +112,26 @@ All user inputs were tested thoroughly to ensure all input data is handled corre
 ## Libraries and Technologies Used
 
 ### Python Libraries:
-[Requests](https://pypi.org/project/requests/) - Used for API requests. <br>
-[Os](https://docs.python.org/3/library/os.html) - Used for OS interactions. <br>
-[Json](https://docs.python.org/3/library/json.html) - Used to handle json formatted data from the API. <br>
-[Time](https://docs.python.org/3/library/time.html) - Used to convert timestamps to days. <br>
-[Colorama](https://pypi.org/project/colorama/) - Used to add color. <br>
-[Texttable](https://pypi.org/project/texttable/) - Used to build tables for weather forecasts. <br>
-[Art](https://pypi.org/project/art/) - Used to create larege fonts. <br>
+- [Requests](https://pypi.org/project/requests/) - Used for API requests. <br>
+- [Os](https://docs.python.org/3/library/os.html) - Used for OS interactions. <br>
+- [Json](https://docs.python.org/3/library/json.html) - Used to handle json formatted data from the API. <br>
+- [Time](https://docs.python.org/3/library/time.html) - Used to convert timestamps to days. <br>
+- [Colorama](https://pypi.org/project/colorama/) - Used to add color. <br>
+- [Texttable](https://pypi.org/project/texttable/) - Used to build tables for weather forecasts. <br>
+- [Art](https://pypi.org/project/art/) - Used to create larege fonts. <br>
 
 ### Tools Used
-GitHub - Code Repo
-Code Anywhere - IDE
-Heroku - Deployment
-Node-Red - Experimentation with API requests.
+- [GitHub](https://github.com/Farmer-Eds-Shed/Farm-Weather-Window) - Code Repo
+- [Code Anywhere](https://app.codeanywhere.com/) - IDE
+- [Heroku](https://heroku.com/) - Deployment
+- [Node-Red](https://nodered.org/) - Experimentation with API requests.
 
 
 ## Deployment
 
-The site was deployed via [Heroku](https://dashboard.heroku.com/apps) using Code Institutes mock terminal, and the live link can be found [here:](https://farm-weather-window-7024a2604c2c.herokuapp.com/) 
+- The site was deployed via [Heroku](https://dashboard.heroku.com/apps) using Code Institutes mock terminal, and the live link can be found [here:](https://farm-weather-window-7024a2604c2c.herokuapp.com/) 
 
-Before deploying to Heroku pip3 freeze > requirements.txt was used to add all the dependencies required to the requirements.txt file.
+- Before deploying to Heroku pip3 freeze > requirements.txt was used to add all the dependencies required to the requirements.txt file.
 
 - Steps for deployment:
     - Fork or clone this repository
@@ -143,15 +143,7 @@ Before deploying to Heroku pip3 freeze > requirements.txt was used to add all th
     - Click on **Deploy**
 
 
-
-
 ## Credits 
-[codingninjas.com](https://www.codingninjas.com/studio/library/how-to-clear-a-screen-in-python) - Clear screen function
-[computinglearner.com](https://computinglearner.com/how-to-create-a-menu-for-a-python-console-application/?utm_content=cmp-true) - Main menu
-
-### Resources Used
-
-
-
-
-## Acknowledgments
+- [codingninjas.com](https://www.codingninjas.com/studio/library/how-to-clear-a-screen-in-python) - Clear screen function
+- [computinglearner.com](https://computinglearner.com/how-to-create-a-menu-for-a-python-console-application/?utm_content=cmp-true) - Main menu
+- [Code Institute](https://github.com/Code-Institute-Org/python-essentials-template) - Python Essentials Template
